@@ -93,4 +93,10 @@ class Game{
             this.updateGameControls(this);
         }
     }
+    retreatPhase(){
+        this.erasePlayerShips();
+        this.clearPlayerShips();
+        this.setGameState("game_completed");
+        this.updateGameControls(this);
+    }
 }

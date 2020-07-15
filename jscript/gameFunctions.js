@@ -54,3 +54,6 @@ function newGame(){
 function attack(){
     window.game.attackPhase();
 }
+function retreat(){
+    window.game.retreatPhase()
+}

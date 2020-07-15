@@ -42,10 +42,11 @@ function updateControls(game){
             controlBox.innerHTML = playBtnsHTML;
             let atkBtn = document.querySelector('#battle_attack');
             atkBtn.setAttribute("onclick",`attack()`);
+            let retBtn = document.querySelector('#battle_retreat');
+            retBtn.setAttribute("onclick",`retreat()`);
             break;
         }
         case 'game_completed':{
-            newGame();
             controlBox.innerHTML = startBtnHTML;
             let startBtn = document.querySelector('#game_start');
             startBtn.setAttribute("onclick",`newGame();updateGame('battle')`);
