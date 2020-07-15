@@ -2,6 +2,7 @@ class SpaceShip {
     constructor(){
         this.type = "";
         this.id = "";
+        this.faction = "";
         this.hull = 0;
         this.firepower = 0;
         this.accuracy = 0.0;
@@ -11,6 +12,9 @@ class SpaceShip {
     }
     getID(){
         return this.id;
+    }
+    getFaction(){
+        return this.faction;
     }
     getHull(){
         return this.hull;
@@ -26,6 +30,9 @@ class SpaceShip {
     }
     setID(i){
         this.id = i;
+    }
+    setFaction(ft){
+        this.faction = ft;
     }
     setHull(h){
         this.hull = h;

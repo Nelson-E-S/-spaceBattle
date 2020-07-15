@@ -1,31 +1,23 @@
-/*ship references*/
-var playerShipHTML = 
-    `<div class="player" id="player_1">
-        <div id="pic"></div>
-        <div id="hull"></div>
-        <div id="aux">
-            <div id="fire"></div>
-            <div id="acc"></div>
-        </div>
-    </div>`;
-var enemyShipHTML = 
-    `<div class="enemy" id="enemy_<id>">
-        <div id="pic"></div>
-        <div id="hull"></div>
-        <div id="aux">
-            <div id="fire"></div>
-            <div id="acc"></div>
-        </div>
-    </div>`
-
-/**Adds player ship to player space */
-function drawPlayer(){
-    let section_player = document.getElementById('player_space');
-    console.log(section_player)
-    section_player.innerHTML = playerShipHTML;
+/**Draws player/enemy ship to player/enemy space with up to date player/enemy SpaceShip data*/
+function drawShip(ship){
+    switch (ship.getFaction()){
+        case 'player':{
+            let section_player = document.getElementById('player_space');
+            section_player.innerHTML = playerShipHTML.replace('<id>',ship.getID()).replace('<hull>',ship.getHull()).replace('<fp>',ship.getFirepower()).replace('<acc>',ship.getAccuracy());
+            break
+        }
+        case 'enemy':{
+            let section_enemy = document.getElementById('enemy_space');
+            section_enemy.innerHTML = enemyShipHTML.replace('<id>',ship.getID()).replace('<hull>',ship.getHull()).replace('<fp>',ship.getFirepower()).replace('<acc>',ship.getAccuracy());
+            break
+        }
+        default:{
+            console.log('Error loading ship faction\n'+ship);
+        }
+    }
 }
-
-function removePlayer(){
-    let player = document.getElementById('player_1');
-    player.remove();
+/**Removes player/enemy ship from player/enemy space */
+function removeShip(ship){
+    let shipHTML = document.getElementById(ship.getID());
+    shipHTML.remove();
 }

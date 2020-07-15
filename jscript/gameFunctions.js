@@ -8,6 +8,7 @@ function loadPlayer(){
     let ship = new SpaceShip;
     ship.setType('player_main');
     ship.setID('player_main');
+    ship.setFaction('player');
     ship.setHull(20);
     ship.setFirepower(5);
     ship.setAccuracy(0.7);
@@ -19,6 +20,7 @@ function loadEnemy(i){
     let ship = new SpaceShip;
     ship.setType('enemy_simple')
     ship.setID(`enemy_${i}`);
+    ship.setFaction('enemy');
     ship.setHull(Math.floor(rnd(3,6)));
     ship.setFirepower(Math.floor(rnd(2,4)));
     ship.setAccuracy(Math.floor(rnd(6,8))/10);
