@@ -19,7 +19,7 @@ var enemyShipHTML =
     </div>`;
 /*control references*/
 var startBtnHTML = 
-    `<button id="start">Start</button>`;
+    `<button id="game_start">Start</button>`;
 var playBtnsHTML = 
-    `<button id="attack">Attack</button>
-    <button id="retreat">Retreat</button>`;
+    `<button id="battle_attack">Attack</button>
+    <button id="battle_retreat">Retreat</button>`;

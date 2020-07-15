@@ -18,3 +18,7 @@ section{
     width: 50%;
     border: 2px solid grey;
 }
+#player_controls #controls{
+    display: flex;
+    flex-flow: row nowrap;
+}

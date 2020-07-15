@@ -34,3 +34,8 @@ function loadEnemySet(n){
         shipSet.push(loadEnemy(i));
     return shipSet;
 }
+
+/**updates controls as necessary, uses a global Game object*/
+function updateGame(state){
+    newGame.setGameState(state);
+}

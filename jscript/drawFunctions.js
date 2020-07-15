@@ -27,3 +27,23 @@ function removeShip(ship){
     let shipHTML = document.getElementById(ship.getID());
     shipHTML.remove();
 }
+
+/**Sets up controls based on game state */
+function updateControls(game){
+    let controlBox = document.getElementById('player_controls').querySelector('#controls');
+    switch (game.getGameState()){
+        case 'start':{
+            controlBox.innerHTML = startBtnHTML;
+            let startBtn = document.querySelector('#game_start');
+            startBtn.setAttribute("onclick",`updateGame('battle')`);
+            break;
+        }
+        case 'battle':{
+            controlBox.innerHTML = playBtnsHTML;
+            break;
+        }
+        default:{
+            console.log('failed to read game state!');
+        }
+    }
+}
