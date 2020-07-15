@@ -1,0 +1,87 @@
+<style>
+    /*start of enemy styling*/
+    #enemy{
+        border: solid black;
+        width: 250px;
+        height: 100px;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    #enemy #pic{
+        width: 100%;
+        height: 70%;
+        background-color: red;
+    }
+    #enemy #hull{
+        width: 100%;
+        height: 15%;
+        background-color: green;
+    }
+    #enemy #aux{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    #enemy #aux #fire{
+        width: 50%;
+        background-color: yellow;
+    }
+    #enemy #aux #acc{
+        width: 50%;
+        background-color: grey;
+    }
+    /*end of enemy styling*/
+
+    /*start of player styling*/
+    #player{
+        border: solid black;
+        width: 250px;
+        height: 100px;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    #player #pic{
+        width: 100%;
+        height: 70%;
+        background-color: blue;
+    }
+    #player #hull{
+        width: 100%;
+        height: 15%;
+        background-color: green;
+    }
+    #player #aux{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    #player #aux #fire{
+        width: 50%;
+        background-color: yellow;
+    }
+    #player #aux #acc{
+        width: 50%;
+        background-color: grey;
+    }
+    /*end of player styling*/
+</style>
+
+<div id="enemy">
+    <div id="pic"></div>
+    <div id="hull"></div>
+    <div id="aux">
+        <div id="fire"></div>
+        <div id="acc"></div>
+    </div>
+</div>
+<br>
+<div id="player">
+    <div id="pic"></div>
+    <div id="hull"></div>
+    <div id="aux">
+        <div id="fire"></div>
+        <div id="acc"></div>
+    </div>
+</div>
