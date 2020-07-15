@@ -14,7 +14,6 @@ class Game{
         return this.game_state;
     };
     setGameState(g){
-        alert('hi');
         this.game_state = g;
         updateControls(this);
     };
@@ -30,8 +29,11 @@ class Game{
     clearPlayerShips(){
         this.player.shift();
     };
-    updatePlayerShip(){
+    updatePlayerShipVisual(){
         updateShip(this.player[0]);
+    };
+    updatePlayerShipData(h){
+        this.player[0].setHull(h);
     }
     addEnemyShipSet(){
         this.enemy = loadEnemySet(6);
@@ -45,10 +47,50 @@ class Game{
     clearEnemyShips(){
         this.enemy.shift();
     };
-    updateEnemyShip(){
+    updateEnemyShipVisual(){
         updateShip(this.enemy[0]);
+    };
+    updateEnemyShipData(h){
+        this.enemy[0].setHull(h);
     }
-    updateControls(){
+    updateGameControls(){
         updateControls(this);
+    };
+    attack(ship){
+        let atkRoll = Math.random();
+        if (atkRoll <= ship.getAccuracy())
+            return true;
+        return false;
+    }
+    attackPhase(){
+        if(this.getGameState() === "battle"){
+            let enemyDown = false;
+            let playerDown = false;
+            if(this.attack(this.player[0])){
+                this.enemy[0].setHull(this.enemy[0].getHull() - this.player[0].getFirepower());
+                this.updateEnemyShipVisual();
+                if(this.enemy[0].hull <= 0){
+                    this.eraseEnemyShips();
+                    this.clearEnemyShips();
+                    if(this.enemy.length !== 0)
+                        this.drawEnemyShips();
+                    enemyDown = true;
+                }
+            }
+            if(!enemyDown){
+                if(this.attack(this.enemy[0])){
+                    this.player[0].setHull(this.player[0].getHull() - this.enemy[0].getFirepower());
+                    this.updatePlayerShipVisual();
+                    if(this.player[0].hull <= 0){
+                        this.erasePlayerShips();
+                        this.clearPlayerShips();
+                        playerDown = true;
+                    }
+                }
+            }
+            if(playerDown || (this.enemy.length === 0))
+                this.setGameState("game_completed");
+            this.updateGameControls(this);
+        }
     }
 }

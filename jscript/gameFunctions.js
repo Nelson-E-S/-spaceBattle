@@ -47,5 +47,10 @@ function newGame(){
     window.game.drawPlayerShips();
     window.game.addEnemyShipSet();
     window.game.drawEnemyShips();
-    window.game.updateControls();
+    window.game.updateGameControls();
+}
+
+/**calls the Game objects attack phase plan */
+function attack(){
+    window.game.attackPhase();
 }

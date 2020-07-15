@@ -40,6 +40,15 @@ function updateControls(game){
         }
         case 'battle':{
             controlBox.innerHTML = playBtnsHTML;
+            let atkBtn = document.querySelector('#battle_attack');
+            atkBtn.setAttribute("onclick",`attack()`);
+            break;
+        }
+        case 'game_completed':{
+            newGame();
+            controlBox.innerHTML = startBtnHTML;
+            let startBtn = document.querySelector('#game_start');
+            startBtn.setAttribute("onclick",`newGame();updateGame('battle')`);
             break;
         }
         default:{
