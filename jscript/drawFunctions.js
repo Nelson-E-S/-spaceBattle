@@ -1,4 +1,4 @@
-/**Draws player/enemy ship to player/enemy space with up to date player/enemy SpaceShip data*/
+/**Initializes player/enemy ship to player/enemy space with up to date player/enemy SpaceShip data*/
 function drawShip(ship){
     switch (ship.getFaction()){
         case 'player':{
@@ -15,6 +15,12 @@ function drawShip(ship){
             console.log('Error loading ship faction\n'+ship);
         }
     }
+}
+/**Updates player/enemy ship html data */
+function updateShip(ship){
+    let shipHTML = document.getElementById(ship.getID());
+    let shipHull = shipHTML.querySelector('#hull');
+    shipHull.innerHTML = ship.getHull();
 }
 /**Removes player/enemy ship from player/enemy space */
 function removeShip(ship){
