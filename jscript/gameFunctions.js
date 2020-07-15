@@ -37,5 +37,15 @@ function loadEnemySet(n){
 
 /**updates controls as necessary, uses a global Game object*/
 function updateGame(state){
-    newGame.setGameState(state);
+    window.game.setGameState(state);
+}
+
+/**creates a new game and initializes actors and setups */
+function newGame(){
+    window.game = new Game()
+    window.game.addPlayerShips();
+    window.game.drawPlayerShips();
+    window.game.addEnemyShipSet();
+    window.game.drawEnemyShips();
+    window.game.updateControls();
 }
