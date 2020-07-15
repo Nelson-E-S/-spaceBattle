@@ -1,66 +1,70 @@
 /*start of enemy styling*/
-#enemy{
+.enemy{
     border: solid black;
     width: 250px;
     height: 100px;
     display: flex;
     flex-flow: column nowrap;
+    color: white;
 }
-#enemy #pic{
+.enemy #pic{
     width: 100%;
     height: 70%;
     background-color: red;
 }
-#enemy #hull{
+.enemy #hull{
     width: 100%;
     height: 15%;
     background-color: green;
 }
-#enemy #aux{
+.enemy #aux{
     width: 100%;
     height: 15%;
     display: flex;
     flex-flow: row nowrap;
 }
-#enemy #aux #fire{
+.enemy #aux #fire{
     width: 50%;
     background-color: yellow;
+    color: black;
 }
-#enemy #aux #acc{
+.enemy #aux #acc{
     width: 50%;
     background-color: grey;
 }
 /*end of enemy styling*/
 
 /*start of player styling*/
-#player{
+.player{
     border: solid black;
     width: 250px;
     height: 100px;
     display: flex;
     flex-flow: column nowrap;
+    color: white;
 }
-#player #pic{
+.player #pic{
     width: 100%;
     height: 70%;
     background-color: blue;
 }
-#player #hull{
+.player #hull{
     width: 100%;
     height: 15%;
     background-color: green;
 }
-#player #aux{
+.player #aux{
     width: 100%;
     height: 15%;
     display: flex;
     flex-flow: row nowrap;
 }
-#player #aux #fire{
+.player #aux #fire{
     width: 50%;
     background-color: yellow;
+    color: black;
 }
-#player #aux #acc{
+.player #aux #acc{
     width: 50%;
     background-color: grey;
 }

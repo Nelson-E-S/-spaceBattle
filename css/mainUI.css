@@ -2,11 +2,12 @@ section{
     border: 5px solid black;
     margin: 10px;
 }
-#enemy_space{
+#enemy_space, #player_space{
     height: 35%;
-}
-#player_space{
-    height: 35%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
 }
 #player_controls{
     height: 30%;
