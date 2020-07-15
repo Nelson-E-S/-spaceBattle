@@ -1,0 +1,19 @@
+section{
+    border: 5px solid black;
+    margin: 10px;
+}
+#enemy_space{
+    height: 35%;
+}
+#player_space{
+    height: 35%;
+}
+#player_controls{
+    height: 30%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+#player_controls #controls, #player_controls #log{
+    width: 50%;
+    border: 2px solid grey;
+}
