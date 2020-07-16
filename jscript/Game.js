@@ -8,10 +8,10 @@ class Game{
         return this.game_state;
     };
     getPlayer(){
-        return this.game_state;
+        return this.player;
     };
     getEnemy(){
-        return this.game_state;
+        return this.enemy;
     };
     setGameState(g){
         this.game_state = g;
@@ -21,37 +21,37 @@ class Game{
         this.player.push(loadPlayer());
     };
     drawPlayerShips(){
-        drawShip(this.player[0]);
+        drawShip(this.getPlayer()[0]);
     };
     erasePlayerShips(){
-        removeShip(this.player[0]);
+        removeShip(this.getPlayer()[0]);
     };
     clearPlayerShips(){
-        this.player.shift();
+        this.getPlayer().shift();
     };
     updatePlayerShipVisual(){
-        updateShip(this.player[0]);
+        updateShip(this.getPlayer()[0]);
     };
     updatePlayerShipData(h){
-        this.player[0].setHull(h);
+        this.getPlayer()[0].setHull(h);
     }
     addEnemyShipSet(){
         this.enemy = loadEnemySet(6);
     };
     drawEnemyShips(){
-        drawShip(this.enemy[0]);
+        drawShip(this.getEnemy()[0]);
     };
     eraseEnemyShips(){
-        removeShip(this.enemy[0]);
+        removeShip(this.getEnemy()[0]);
     };
     clearEnemyShips(){
-        this.enemy.shift();
+        this.getEnemy().shift();
     };
     updateEnemyShipVisual(){
-        updateShip(this.enemy[0]);
+        updateShip(this.getEnemy()[0]);
     };
     updateEnemyShipData(h){
-        this.enemy[0].setHull(h);
+        this.getEnemy()[0].setHull(h);
     }
     updateGameControls(){
         updateControls(this);
@@ -66,20 +66,20 @@ class Game{
         if(this.getGameState() === "battle"){
             let enemyDown = false;
             let playerDown = false;
-            if(this.attack(this.player[0])){
-                this.enemy[0].setHull(this.enemy[0].getHull() - this.player[0].getFirepower());
+            if(this.attack(this.getPlayer()[0])){
+                this.getEnemy()[0].setHull(this.getEnemy()[0].getHull() - this.getPlayer()[0].getFirepower());
                 this.updateEnemyShipVisual();
-                if(this.enemy[0].hull <= 0){
+                if(this.getEnemy()[0].hull <= 0){
                     this.eraseEnemyShips();
                     this.clearEnemyShips();
-                    if(this.enemy.length !== 0)
+                    if(this.getEnemy().length !== 0)
                         this.drawEnemyShips();
                     enemyDown = true;
                 }
             }
             if(!enemyDown){
-                if(this.attack(this.enemy[0])){
-                    this.player[0].setHull(this.player[0].getHull() - this.enemy[0].getFirepower());
+                if(this.attack(this.getEnemy()[0])){
+                    this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - this.getEnemy()[0].getFirepower());
                     this.updatePlayerShipVisual();
                     if(this.player[0].hull <= 0){
                         this.erasePlayerShips();
@@ -88,7 +88,7 @@ class Game{
                     }
                 }
             }
-            if(playerDown || (this.enemy.length === 0))
+            if(playerDown || (this.getEnemy().length === 0))
                 this.setGameState("game_completed");
             this.updateGameControls(this);
         }
