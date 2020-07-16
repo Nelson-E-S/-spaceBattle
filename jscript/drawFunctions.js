@@ -21,6 +21,7 @@ function updateShip(ship){
     let shipHTML = document.getElementById(ship.getID());
     let shipHull = shipHTML.querySelector('#hull');
     shipHull.innerHTML = ship.getHull();
+    shipHull.style.background = `linear-gradient(to right, green ${Math.floor((ship.getHull()/ship.getBaseHull())*100)}%, brown 0%)`;
 }
 /**Removes player/enemy ship from player/enemy space */
 function removeShip(ship){
