@@ -22,3 +22,6 @@ section{
     display: flex;
     flex-flow: row nowrap;
 }
+#log{
+    overflow: auto;
+}

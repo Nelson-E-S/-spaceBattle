@@ -57,3 +57,15 @@ function updateControls(game){
         }
     }
 }
+
+/**following functions will assist in writing and clearing the message log box*/
+function writeMessageBox(str){
+    let messageBox = document.getElementById('log');
+    let temp = messageBox.innerHTML;
+    clearMessageBox()
+    messageBox.innerHTML = str + temp;
+}
+function clearMessageBox(){
+    let messageBox = document.getElementById('log');
+    messageBox.innerHTML = "";
+}

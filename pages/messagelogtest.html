@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" href="../css/mainUI.css">
+        <link rel="stylesheet" href="../css/shipStyling.css">
+        <link rel="stylesheet" href="../css/controls.css">
+        <link rel="stylesheet" href="../css/messagelogs.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <section id="enemy_space"></section>
+        <section id="player_space"></section>
+        <section id="player_controls">
+            <div id="controls"></div>
+            <div id="log">
+                <span class="round">Round <x></span><br>
+                <span class="player_attack player_acc">Player <h/m>!</span><br>
+                <span class="player_attack enemy_dmg">Player hits for <x> damage</span><br>
+                <span class="destroyedship enemy_ship">Player destroys <enemyid></span><br>
+                <span class="player_won">Game Won!<br>Hit Start to try again.</span><br>
+                <span class="round">Round <x>.5</span><br>
+                <span class="enemy_attack enemy_acc">Enemy <h/m>!</span><br>
+                <span class="enemy_attack player_dmg">Enemy hits for <x> damage</span><br>
+                <span class="destroyedship player_ship">Enemy destroys Player Ship!</span><br>
+                <span class="player_lost">Game Over!<br>Hit Start to try again.</span><br>
+            </div>
+        </section>
+        <script src="" async defer></script>
+    </body>
+</html>

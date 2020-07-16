@@ -47,6 +47,8 @@ function newGame(){
     window.game.drawPlayerShips();
     window.game.addEnemyShipSet();
     window.game.drawEnemyShips();
+    window.game.setPlayerWinState("undecided");
+    window.game.eraseMessageBox();
     window.game.updateGameControls();
 }
 

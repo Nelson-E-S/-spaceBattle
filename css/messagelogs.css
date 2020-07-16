@@ -1,0 +1,29 @@
+.round{
+    font-weight: bold;
+}
+.player_attack{
+    color: blue;
+}
+.player_attack.enemy_dmg, .enemy_attack.player_dmg{
+    font-style: italic;
+}
+.destroyedship{
+    background: red;
+    color: white;
+    font-weight: bold;
+}
+.player_won{
+    background: green;
+    color: yellow;
+    font-weight: bolder;
+    border: 2px solid yellow;
+}
+.enemy_attack{
+    color: red;
+}
+.player_lost{
+    background:red;
+    color: yellow;
+    font-weight: bolder;
+    border: 2px solid yellow;
+}
