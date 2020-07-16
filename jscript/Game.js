@@ -128,8 +128,6 @@ class Game{
                     this.eraseEnemyShips();
                     this.clearEnemyShips();
                     this.setPlayerChoice(0);
-                    if(this.getEnemy().length !== 0)
-                        this.drawEnemyShips();
                 };
                 if(getCurrentEnemeies() === 0)
                     enemyDown = true;
@@ -156,6 +154,9 @@ class Game{
                         }
                     }
                 }
+            } else{
+                if(this.getEnemy().length !== 0)
+                        this.drawEnemyShips();
             }
             if(playerDown || (this.getEnemy().length === 0)){
                 this.setGameState("game_completed");
