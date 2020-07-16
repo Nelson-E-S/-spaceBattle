@@ -41,6 +41,7 @@ function loadEnemySet(n){
 
 /**updates controls as necessary, uses a global Game object*/
 function updateGame(state){
+    window.game.updateMessageBox(infoEnemyChoice);
     window.game.setGameState(state);
 }
 

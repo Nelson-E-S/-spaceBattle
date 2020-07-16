@@ -44,3 +44,5 @@ var destroyedPlayer =
     `<span class="destroyedship player_ship">-id- destroys Player Ship!</span><br>`;
 var playerLost = 
     `<span class="player_lost">Game Over!<br>Hit Start to try again.</span><br>`;
+var infoEnemyChoice = 
+    `<span class="info">You can choose which enemy to attack: by default you'll attack the left most enemy</span><br>`;
