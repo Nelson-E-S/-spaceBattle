@@ -9,8 +9,9 @@ function loadPlayer(){
     ship.setType('player_main');
     ship.setID('player_main');
     ship.setFaction('player');
-    ship.setHull(20);
-    ship.setBaseHull(20);
+    let hull = 20;
+    ship.setHull(hull);
+    ship.setBaseHull(hull);
     ship.setFirepower(5);
     ship.setAccuracy(0.7);
     return ship;
@@ -45,6 +46,7 @@ function updateGame(state){
 
 /**creates a new game and initializes actors and setups */
 function newGame(){
+    clearEnemySpace();
     window.game = new Game()
     window.game.addPlayerShips();
     window.game.drawPlayerShips();
@@ -61,4 +63,28 @@ function attack(){
 }
 function retreat(){
     window.game.retreatPhase()
+}
+
+/**get all number of currently drawn enemies*/
+function getCurrentEnemeies(){
+    return document.querySelectorAll(".enemy").length;
+}
+
+/**checkbox handler for player choice*/
+function sendPlayerChoice(cBox){
+    let enemies = document.querySelectorAll('.enemy');
+    if(cBox.checked){
+        for(enemy in enemies){
+            if(enemies[enemy].id === cBox.value){
+                window.game.setPlayerChoice(enemy);
+                let eSelector = document.querySelectorAll(".enemySelector");
+                for(e in eSelector){
+                    if (e != enemy)
+                        eSelector[e].checked = false;
+                }
+            }
+        }
+    } else
+        window.game.setPlayerChoice(0);
+    
 }

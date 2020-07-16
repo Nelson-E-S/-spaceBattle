@@ -9,8 +9,8 @@ var playerShipHTML =
         </div>
     </div>`;
 var enemyShipHTML = 
-    `<div class="enemy" id="<id>">
-        <div id="pic">x</div>
+    `<div class="enemy" id="-id-">
+        <div id="pic"><input type="checkbox" id="-i-" value="-id-" class="enemySelector" onchange="sendPlayerChoice(this)">:id:</div>
         <div id="hull"><hull></div>
         <div id="aux">
             <div id="fire"><fp></div>
@@ -37,10 +37,10 @@ var playerWon =
 var halfRound = 
     `<span class="round">Round <x>.5</span><br>`;
 var enemyAcc =
-    `<span class="enemy_attack enemy_acc">Enemy <h/m>!</span><br>`;
+    `<span class="enemy_attack enemy_acc">-id- <h/m>!</span><br>`;
 var enemyDmg = 
-    `<span class="enemy_attack player_dmg">Enemy hits for <x> damage</span><br>`;
+    `<span class="enemy_attack player_dmg">-id- hits for <x> damage</span><br>`;
 var destroyedPlayer = 
-    `<span class="destroyedship player_ship">Enemy destroys Player Ship!</span><br>`;
+    `<span class="destroyedship player_ship">-id- destroys Player Ship!</span><br>`;
 var playerLost = 
     `<span class="player_lost">Game Over!<br>Hit Start to try again.</span><br>`;

@@ -8,7 +8,7 @@ function drawShip(ship){
         }
         case 'enemy':{
             let section_enemy = document.getElementById('enemy_space');
-            section_enemy.innerHTML = enemyShipHTML.replace('<id>',ship.getID()).replace('x',ship.getID().toUpperCase()).replace('<hull>',ship.getHull()).replace('<fp>',ship.getFirepower()).replace('<acc>',ship.getAccuracy());
+            section_enemy.innerHTML += enemyShipHTML.replace('-id-',ship.getID()).replace('-id-',ship.getID()).replace('-i-',ship.getID()+"_choice").replace(`:id:`,ship.getID().toUpperCase()).replace('<hull>',ship.getHull()).replace('<fp>',ship.getFirepower()).replace('<acc>',ship.getAccuracy());
             break
         }
         default:{
@@ -69,4 +69,10 @@ function writeMessageBox(str){
 function clearMessageBox(){
     let messageBox = document.getElementById('log');
     messageBox.innerHTML = "";
+}
+
+/**simple enemy space clear */
+function clearEnemySpace(){
+    let section_enemy = document.getElementById('enemy_space');
+    section_enemy.innerHTML = "";
 }

@@ -5,6 +5,7 @@ class Game{
         this.enemy = [];
         this.roundNumber = 1;
         this.playerWinState = "undecided";
+        this.playerChoice = 0;
     };
     getGameState(){
         return this.game_state;
@@ -20,6 +21,12 @@ class Game{
     }
     getPlayerWinState(){
         return this.playerWinState;
+    }
+    getPlayerChoice(){
+        return this.playerChoice;
+    }
+    setPlayerChoice(c){
+        this.playerChoice = c;
     }
     setPlayerWinState(s){
         /*'undecided' or 'determining' or 'player_win' or 'player_lost'*/
@@ -57,16 +64,23 @@ class Game{
         this.enemy = loadEnemySet(6);
     };
     drawEnemyShips(){
-        drawShip(this.getEnemy()[0]);
+        if(getCurrentEnemeies() === 0){
+            if(this.getEnemy().length === 1)
+                drawShip(this.getEnemy()[0]);
+            else{
+                for(let i = 0; i <= Math.floor(rnd(0,1)); i++)
+                    drawShip(this.getEnemy()[i]);
+            }
+        }
     };
     eraseEnemyShips(){
-        removeShip(this.getEnemy()[0]);
+        removeShip(this.getEnemy()[this.getPlayerChoice()]);
     };
     clearEnemyShips(){
-        this.getEnemy().shift();
+        this.getEnemy().splice(this.getPlayerChoice(),1);
     };
     updateEnemyShipVisual(){
-        updateShip(this.getEnemy()[0]);
+        updateShip(this.getEnemy()[this.getPlayerChoice()]);
     };
     updateEnemyShipData(h){
         this.getEnemy()[0].setHull(h);
@@ -105,36 +119,42 @@ class Game{
             let playerDown = false;
             this.setPlayerWinState("determining");
             if(this.attack(this.getPlayer()[0])){
-                this.getEnemy()[0].setHull(this.getEnemy()[0].getHull() - this.getPlayer()[0].getFirepower());
+                this.getEnemy()[this.getPlayerChoice()].setHull(this.getEnemy()[this.getPlayerChoice()].getHull() - this.getPlayer()[0].getFirepower());
                 this.updateMessageBox(playerAcc.replace("<h/m>","hit"));
                 this.updateMessageBox(playerDmg.replace("<x>",this.getPlayer()[0].getFirepower()));
                 this.updateEnemyShipVisual();
-                if(this.getEnemy()[0].getHull() <= 0){
-                    this.updateMessageBox(destroyedEnemy.replace("<enemyid>",this.getEnemy()[0].getID()))
+                if(this.getEnemy()[this.getPlayerChoice()].getHull() <= 0){
+                    this.updateMessageBox(destroyedEnemy.replace("<enemyid>",this.getEnemy()[this.getPlayerChoice()].getID()))
                     this.eraseEnemyShips();
                     this.clearEnemyShips();
+                    this.setPlayerChoice(0);
                     if(this.getEnemy().length !== 0)
                         this.drawEnemyShips();
-                    enemyDown = true;
                 };
+                if(getCurrentEnemeies() === 0)
+                    enemyDown = true;
             }else{
                 this.updateMessageBox(playerAcc.replace("<h/m>","missed"));
             };
             if(!enemyDown){
                 this.updateMessageBox(halfRound.replace("<x>",this.getRoundNumber()));
-                if(this.attack(this.getEnemy()[0])){
-                    this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - this.getEnemy()[0].getFirepower());
-                    this.updateMessageBox(enemyAcc.replace("<h/m>","hit"));
-                    this.updateMessageBox(enemyDmg.replace("<x>",this.getEnemy()[0].getFirepower()));
-                    this.updatePlayerShipVisual();
-                    if(this.getPlayer()[0].getHull() <= 0){
-                        this.updateMessageBox(destroyedPlayer);
-                        this.erasePlayerShips();
-                        this.clearPlayerShips();
-                        playerDown = true;
-                    };
-                }else{
-                    this.updateMessageBox(enemyAcc.replace("<h/m>","missed"));
+                for(let i = 0; i < getCurrentEnemeies(); i++){
+                    if(!playerDown){
+                        if(this.attack(this.getEnemy()[i])){
+                            this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - this.getEnemy()[i].getFirepower());
+                            this.updateMessageBox(enemyAcc.replace("<h/m>","hit").replace("-id-",this.getEnemy()[i].getID()));
+                            this.updateMessageBox(enemyDmg.replace("<x>",this.getEnemy()[i].getFirepower()).replace("-id-",this.getEnemy()[i].getID()));
+                            this.updatePlayerShipVisual();
+                            if(this.getPlayer()[0].getHull() <= 0){
+                                this.updateMessageBox(destroyedPlayer.replace("-id-",this.getEnemy()[i].getID()));
+                                this.erasePlayerShips();
+                                this.clearPlayerShips();
+                                playerDown = true;
+                            };
+                        }else{
+                            this.updateMessageBox(enemyAcc.replace("<h/m>","missed").replace("-id-",this.getEnemy()[i].getID()));
+                        }
+                    }
                 }
             }
             if(playerDown || (this.getEnemy().length === 0)){
