@@ -10,7 +10,7 @@ var playerShipHTML =
     </div>`;
 var enemyShipHTML = 
     `<div class="enemy" id="<id>">
-        <div id="pic"></div>
+        <div id="pic">x</div>
         <div id="hull"><hull></div>
         <div id="aux">
             <div id="fire"><fp></div>
