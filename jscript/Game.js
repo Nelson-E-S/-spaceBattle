@@ -143,8 +143,6 @@ class Game{
             resultSign = Math.abs(resultSign);
             if(cP + 1 < this.getEnemy()[this.getPlayerChoice()].getFirePodHealth().length)
                 this.updateBossDamageData((cP+1),resultSign);
-            else
-                this.getEnemy()[this.getPlayerChoice()].setHull(this.getEnemy()[this.getPlayerChoice()].getHull() - d);
         } else {
             this.getEnemy()[this.getPlayerChoice()].getFirePodHealth()[cP] = resultSign;
         }
@@ -197,6 +195,9 @@ class Game{
                             }
                         }else
                             numAtks = 1;
+                        if(numAtks === 0)
+
+                            this.updateMessageBox(enemyNoAcc);
                         while(numAtks > 0 && !playerDown){
                             if(this.attack(this.getEnemy()[i])){
                                 let damage = this.getEnemy()[i].getFirepower();
