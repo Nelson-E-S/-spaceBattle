@@ -139,7 +139,16 @@ class Game{
                 for(let i = 0; i < getCurrentEnemeies(); i++){
                     if(!playerDown){
                         if(this.attack(this.getEnemy()[i])){
-                            this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - this.getEnemy()[i].getFirepower());
+                            let damage = this.getEnemy()[i].getFirepower();
+                            let resultSign = this.getPlayer()[0].getShield() - damage;
+                            if (this.getPlayer()[0].getShield() === 0){
+                                this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - damage);
+                            }else if(resultSign < 0){
+                                this.getPlayer()[0].setShield(0);
+                                this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - Math.abs(resultSign));
+                            }else{
+                                this.getPlayer()[0].setShield(this.getPlayer()[0].getShield() - damage);
+                            }
                             this.updateMessageBox(enemyAcc.replace("<h/m>","hit").replace("-id-",this.getEnemy()[i].getID()));
                             this.updateMessageBox(enemyDmg.replace("<x>",this.getEnemy()[i].getFirepower()).replace("-id-",this.getEnemy()[i].getID()));
                             this.updatePlayerShipVisual();

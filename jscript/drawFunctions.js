@@ -4,6 +4,10 @@ function drawShip(ship){
         case 'player':{
             let section_player = document.getElementById('player_space');
             section_player.innerHTML = playerShipHTML.replace('<id>',ship.getID()).replace('<hull>',ship.getHull()).replace('<fp>',ship.getFirepower()).replace('<acc>',ship.getAccuracy()).replace('<shield>',ship.getShield());
+            let shipHTML = document.getElementById(ship.getID());
+            let shipShield = shipHTML.querySelector('#shield');
+            shipShield.innerHTML = ship.getShield();
+            shipShield.style.background = `linear-gradient(to right, aqua ${isNaN(Math.floor((ship.getShield()/ship.getBaseShield())*100))?0:Math.floor((ship.getShield()/ship.getBaseShield())*100)}%, blue 0%)`;
             break
         }
         case 'enemy':{
@@ -25,9 +29,9 @@ function updateShip(ship){
     let shipShield = shipHTML.querySelector('#shield');
     shipShield.innerHTML = ship.getShield();
     if (ship.getFaction() === "player")
-        shipShield.style.background = `linear-gradient(to right, aqua ${isNaN(Math.floor((window.game.player[0].getShield()/window.game.player[0].getBaseShield())*100))?0:Math.floor((window.game.player[0].getShield()/window.game.player[0].getBaseShield())*100)}%, blue 0%)`;
+        shipShield.style.background = `linear-gradient(to right, aqua ${isNaN(Math.floor((ship.getShield()/ship.getBaseShield())*100))?0:Math.floor((ship.getShield()/ship.getBaseShield())*100)}%, blue 0%)`;
     else if (ship.getFaction() === "enemy")
-        shipShield.style.background = `linear-gradient(to right, aqua ${isNaN(Math.floor((window.game.player[0].getShield()/window.game.player[0].getBaseShield())*100))?0:Math.floor((window.game.player[0].getShield()/window.game.player[0].getBaseShield())*100)}%, red 0%)`;
+        shipShield.style.background = `linear-gradient(to right, aqua ${isNaN(Math.floor((ship.getShield()/ship.getBaseShield())*100))?0:Math.floor((ship.getShield()/ship.getBaseShield())*100)}%, red 0%)`;
 }
 /**Removes player/enemy ship from player/enemy space */
 function removeShip(ship){

@@ -12,6 +12,9 @@ function loadPlayer(){
     let hull = 20;
     ship.setHull(hull);
     ship.setBaseHull(hull);
+    let shield = Math.floor(rnd(3,7));
+    ship.setShield(shield);
+    ship.setBaseShield(shield);
     ship.setFirepower(5);
     ship.setAccuracy(0.7);
     return ship;
