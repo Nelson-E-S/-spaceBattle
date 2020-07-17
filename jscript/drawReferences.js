@@ -1,7 +1,7 @@
 /*ship references*/
 var playerShipHTML = 
     `<div class="player" id="<id>">
-        <div id="pic"></div>
+        <div id="pic"><span>Missiles:<input type="checkbox" id="missile_1" class="missileSelector" value="missile" onchange="sendMissileChoice(this)"><input type="checkbox" id="missile_2" class="missileSelector" onchange="sendMissileChoice(this)"><input type="checkbox" id="missile_3" class="missileSelector" onchange="sendMissileChoice(this)"></span></div>
         <div id="shield"><shield></div>
         <div id="hull"><hull></div>
         <div id="aux">
@@ -48,3 +48,5 @@ var playerLost =
     `<span class="player_lost">Game Over!<br>Hit Start to try again.</span><br>`;
 var infoEnemyChoice = 
     `<span class="info">You can choose which enemy to attack: by default you'll attack the left most enemy</span><br>`;
+var infoMissiles = 
+    `<span class="info">You can choose to use a single missile for your attack instead of your ship's firepower.<br>Once a missile is used it will no longer be avialable.<br>Missiles always hit and for 10 damage.</span><br>`;

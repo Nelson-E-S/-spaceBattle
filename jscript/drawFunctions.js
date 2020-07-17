@@ -86,3 +86,16 @@ function clearEnemySpace(){
     let section_enemy = document.getElementById('enemy_space');
     section_enemy.innerHTML = "";
 }
+
+/**Requires: id str, disbles a missle option that was used*/
+function disableMissile(id){
+    let mSelector = document.querySelector(`#${id}`);
+    mSelector.disabled = true;
+}
+
+/**resets all missile options for new game */
+function resetMissiles(){
+    let mSelector = document.querySelectorAll(`.missileSelector`);
+    for(m of mSelector)
+        m.disabled = false;
+}

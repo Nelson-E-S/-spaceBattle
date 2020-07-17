@@ -6,6 +6,8 @@ class Game{
         this.roundNumber = 1;
         this.playerWinState = "undecided";
         this.playerChoice = 0;
+        this.playerMissileChoice = false;
+        this.playerMissile = "";
     };
     getGameState(){
         return this.game_state;
@@ -18,26 +20,38 @@ class Game{
     };
     getRoundNumber(){
         return this.roundNumber;
-    }
+    };
     getPlayerWinState(){
         return this.playerWinState;
-    }
+    };
     getPlayerChoice(){
         return this.playerChoice;
+    };
+    getPlayerMissileChoice(){
+        return this.playerMissileChoice;
+    };
+    getPlayerMissile(){
+        return this.playerMissile;
     }
+    setPlayerMissileChoice(m){
+        this.playerMissileChoice = m;
+    };
+    setPlayerMissile(m){
+        this.playerMissile = m;
+    };
     setPlayerChoice(c){
         this.playerChoice = c;
-    }
+    };
     setPlayerWinState(s){
         /*'undecided' or 'determining' or 'player_win' or 'player_lost'*/
         this.playerWinState = s;
-    }
+    };
     updateRoundNumber(){
         if(this.getPlayerWinState() === 'determining')
             this.roundNumber++;
         else
             this.roundNumber = 1;
-    }
+    };
     setGameState(g){
         this.game_state = g;
         updateControls(this);
@@ -59,7 +73,7 @@ class Game{
     };
     updatePlayerShipData(h){
         this.getPlayer()[0].setHull(h);
-    }
+    };
     addEnemyShipSet(){
         this.enemy = loadEnemySet(6);
     };
@@ -83,7 +97,7 @@ class Game{
         updateShip(this.getEnemy()[this.getPlayerChoice()]);
     };
     updateEnemyShipData(h){
-        this.getEnemy()[0].setHull(h);
+        this.getEnemy()[this.getPlayerChoice()].setHull(h);
     };
     updateGameControls(){
         updateControls(this);
@@ -91,6 +105,9 @@ class Game{
     updateMessageBox(str){
         writeMessageBox(str);
     };
+    disablePlayerMissile(){
+        disableMissile(this.getPlayerMissile());
+    }
     updateMsgBoxPlayerWinState(){
         switch(this.getPlayerWinState()){
             case "player_won":{
@@ -118,10 +135,18 @@ class Game{
             let enemyDown = false;
             let playerDown = false;
             this.setPlayerWinState("determining");
-            if(this.attack(this.getPlayer()[0])){
-                this.getEnemy()[this.getPlayerChoice()].setHull(this.getEnemy()[this.getPlayerChoice()].getHull() - this.getPlayer()[0].getFirepower());
+            if(this.attack(this.getPlayer()[0]) || this.getPlayerMissileChoice()){
                 this.updateMessageBox(playerAcc.replace("<h/m>","hit"));
-                this.updateMessageBox(playerDmg.replace("<x>",this.getPlayer()[0].getFirepower()));
+                if(this.getPlayerMissileChoice()){
+                    this.getEnemy()[this.getPlayerChoice()].setHull(this.getEnemy()[this.getPlayerChoice()].getHull() - 10);
+                    this.disablePlayerMissile();
+                    this.updateMessageBox(playerDmg.replace("<x>",10));
+                } else {
+                    this.getEnemy()[this.getPlayerChoice()].setHull(this.getEnemy()[this.getPlayerChoice()].getHull() - this.getPlayer()[0].getFirepower());
+                    this.updateMessageBox(playerDmg.replace("<x>",this.getPlayer()[0].getFirepower()));
+                };
+                this.setPlayerMissileChoice(false);
+                this.setPlayerMissile("");
                 this.updateEnemyShipVisual();
                 if(this.getEnemy()[this.getPlayerChoice()].getHull() <= 0){
                     this.updateMessageBox(destroyedEnemy.replace("<enemyid>",this.getEnemy()[this.getPlayerChoice()].getID()))

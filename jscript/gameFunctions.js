@@ -45,6 +45,7 @@ function loadEnemySet(n){
 /**updates controls as necessary, uses a global Game object*/
 function updateGame(state){
     window.game.updateMessageBox(infoEnemyChoice);
+    window.game.updateMessageBox(infoMissiles);
     window.game.setGameState(state);
 }
 
@@ -58,6 +59,7 @@ function newGame(){
     window.game.drawEnemyShips();
     window.game.setPlayerWinState("undecided");
     window.game.eraseMessageBox();
+    resetMissiles();
     window.game.updateGameControls();
 }
 
@@ -91,4 +93,18 @@ function sendPlayerChoice(cBox){
     } else
         window.game.setPlayerChoice(0);
     
+}
+
+/**checkbox handler for missilie choice */
+function sendMissileChoice(cBox){
+    let mSelector = document.querySelectorAll(".missileSelector");
+    for (m in mSelector){
+        if (mSelector[m].id != cBox.id)
+            mSelector[m].checked = false;
+    }
+    window.game.setPlayerMissileChoice(cBox.checked);
+    if(cBox.checked)
+        window.game.setPlayerMissile(cBox.id);
+    else
+        window.game.setPlayerMissile("");
 }
