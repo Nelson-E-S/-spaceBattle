@@ -21,6 +21,12 @@
     height: 15%;
     background-color: green;
 }
+.enemy #shield{
+    width: 100%;
+    height: 15%;
+    background-color: red;
+    color:red;
+}
 .enemy #aux{
     width: 100%;
     height: 15%;
@@ -51,6 +57,11 @@
 .player #pic{
     width: 100%;
     height: 70%;
+    background-color: blue;
+}
+.player #shield{
+    width: 100%;
+    height: 15%;
     background-color: blue;
 }
 .player #hull{

@@ -5,6 +5,8 @@ class SpaceShip {
         this.faction = "";
         this.hull = 0;
         this.baseHull = 0;
+        this.shield = 0;
+        this.baseShield = 0;
         this.firepower = 0;
         this.accuracy = 0.0;
     };
@@ -22,6 +24,12 @@ class SpaceShip {
     }
     getBaseHull(){
         return this.baseHull;
+    }
+    getShield(){
+        return this.shield;
+    }
+    getBaseShield(){
+        return this.baseShield;
     }
     getFirepower(){
         return this.firepower;
@@ -43,6 +51,12 @@ class SpaceShip {
     }
     setBaseHull(h){
         this.baseHull = h;
+    }
+    setShield(s){
+        this.shield = s;
+    }
+    setBaseShield(s){
+        this.baseShield = s;
     }
     setFirepower(f){
         this.firepower = f;

@@ -2,6 +2,7 @@
 var playerShipHTML = 
     `<div class="player" id="<id>">
         <div id="pic"></div>
+        <div id="shield"><shield></div>
         <div id="hull"><hull></div>
         <div id="aux">
             <div id="fire"><fp></div>
@@ -11,6 +12,7 @@ var playerShipHTML =
 var enemyShipHTML = 
     `<div class="enemy" id="-id-">
         <div id="pic"><input type="checkbox" id="-i-" value="-id-" class="enemySelector" onchange="sendPlayerChoice(this)">:id:</div>
+        <div id="shield"><shield></div>
         <div id="hull"><hull></div>
         <div id="aux">
             <div id="fire"><fp></div>
