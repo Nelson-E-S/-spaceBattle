@@ -18,6 +18,7 @@ function drawShip(ship){
                     tempHTML = tempHTML.replace('-fp-',ship.getFirepower());
                 };
                 section_enemy.innerHTML += tempHTML;
+                writeMessageBox(infoBoss);
             }else{
                 let section_enemy = document.getElementById('enemy_space');
                 section_enemy.innerHTML += enemyShipHTML.replace('-id-',ship.getID()).replace('-id-',ship.getID()).replace('-i-',ship.getID()+"_choice").replace(`:id:`,ship.getID().toUpperCase()).replace('<hull>',ship.getHull()).replace('<fp>',ship.getFirepower()).replace('<acc>',ship.getAccuracy());

@@ -63,3 +63,5 @@ var infoEnemyChoice =
     `<span class="info">You can choose which enemy to attack: by default you'll attack the left most enemy</span><br>`;
 var infoMissiles = 
     `<span class="info">You can choose to use a single missile for your attack instead of your ship's firepower.<br>Once a missile is used it will no longer be avialable.<br>Missiles always hit and for 10 damage.</span><br>`;
+var infoBoss = 
+    `<span class="info">This is a boss. It's health is the number of firepods and itself shared evenly.<br>As you fire and destroy firepods it will attack with any remaining pods.<br>Good luck!</span><br>`;
