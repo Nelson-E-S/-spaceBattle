@@ -9,10 +9,10 @@ function loadPlayer(){
     ship.setType('player_main');
     ship.setID('player_main');
     ship.setFaction('player');
-    let hull = 30;
+    let hull = 25;
     ship.setHull(hull);
     ship.setBaseHull(hull);
-    let shield = Math.floor(rnd(4,8));
+    let shield = Math.floor(rnd(4,9));
     ship.setShield(shield);
     ship.setBaseShield(shield);
     ship.setFirepower(5);
