@@ -11,8 +11,17 @@ function drawShip(ship){
             break
         }
         case 'enemy':{
-            let section_enemy = document.getElementById('enemy_space');
-            section_enemy.innerHTML += enemyShipHTML.replace('-id-',ship.getID()).replace('-id-',ship.getID()).replace('-i-',ship.getID()+"_choice").replace(`:id:`,ship.getID().toUpperCase()).replace('<hull>',ship.getHull()).replace('<fp>',ship.getFirepower()).replace('<acc>',ship.getAccuracy());
+            if(ship.getID() === "enemy_boss"){
+                let section_enemy = document.getElementById('enemy_space');
+                let tempHTML = enemyBossShipHTML.replace('-id-',ship.getID()).replace('-id-',ship.getID()).replace('-i-',ship.getID()+"_choice").replace(`:id:`,ship.getID().toUpperCase()).replace('<hull>',ship.getHull()).replace('<acc>',ship.getAccuracy());
+                for(h of ship.getFirePodHealth()){
+                    tempHTML = tempHTML.replace('-fp-',ship.getFirepower());
+                };
+                section_enemy.innerHTML += tempHTML;
+            }else{
+                let section_enemy = document.getElementById('enemy_space');
+                section_enemy.innerHTML += enemyShipHTML.replace('-id-',ship.getID()).replace('-id-',ship.getID()).replace('-i-',ship.getID()+"_choice").replace(`:id:`,ship.getID().toUpperCase()).replace('<hull>',ship.getHull()).replace('<fp>',ship.getFirepower()).replace('<acc>',ship.getAccuracy());
+            }
             break
         }
         default:{
@@ -26,6 +35,13 @@ function updateShip(ship){
     let shipHull = shipHTML.querySelector('#hull');
     shipHull.innerHTML = ship.getHull();
     shipHull.style.background = `linear-gradient(to right, green ${Math.floor((ship.getHull()/ship.getBaseHull())*100)}%, brown 0%)`;
+    if(ship.getID() === "enemy_boss"){
+        let shipFP = document.querySelectorAll("#enemy_boss #aux .fire");
+        let f = shipFP.length;
+        for (let i = 0; i < f; i++){
+                shipFP[i].style.background = `linear-gradient(to right, yellow ${Math.floor((ship.getFirePodHealth()[i]/(ship.getBaseHull() / (ship.getFirePodHealth().length + 1)))*100)}%, brown 0%)`;
+        }
+    }
     let shipShield = shipHTML.querySelector('#shield');
     shipShield.innerHTML = ship.getShield();
     if (ship.getFaction() === "player")

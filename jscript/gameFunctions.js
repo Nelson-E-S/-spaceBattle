@@ -9,10 +9,10 @@ function loadPlayer(){
     ship.setType('player_main');
     ship.setID('player_main');
     ship.setFaction('player');
-    let hull = 20;
+    let hull = 30;
     ship.setHull(hull);
     ship.setBaseHull(hull);
-    let shield = Math.floor(rnd(3,7));
+    let shield = Math.floor(rnd(4,8));
     ship.setShield(shield);
     ship.setBaseShield(shield);
     ship.setFirepower(5);
@@ -31,6 +31,21 @@ function loadEnemy(i){
     ship.setBaseHull(hull);
     ship.setFirepower(Math.floor(rnd(2,4)));
     ship.setAccuracy(Math.floor(rnd(6,8))/10);
+    return ship;
+}
+/**Requires: id; return BossShip object for enemy with fire pods*/
+function loadEnemyBoss(){
+    let ship = new BossShip;
+    ship.setType('enemy_boss')
+    ship.setID(`enemy_boss`);
+    ship.setFaction('enemy');
+    let hull = Math.floor(rnd(4,6));
+    ship.setFirePodHealth([hull,hull,hull,hull]);
+    let finalHull = (ship.getFirePodHealth().length + 1) * hull;
+    ship.setHull(finalHull);
+    ship.setBaseHull(finalHull);
+    ship.setFirepower(Math.floor(rnd(1,3)));
+    ship.setAccuracy(Math.floor(rnd(5,8))/10);
     return ship;
 }
 

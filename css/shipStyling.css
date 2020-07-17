@@ -38,6 +38,14 @@
     background-color: yellow;
     color: black;
 }
+#enemy_boss #aux .fire{
+    width: 12.5%;
+    background-color: yellow;
+    color: black;
+    border: 1px dotted black;
+    border-top: none;
+    border-bottom: none;
+}
 .enemy #aux #acc{
     width: 50%;
     background-color: grey;

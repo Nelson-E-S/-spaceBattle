@@ -19,6 +19,19 @@ var enemyShipHTML =
             <div id="acc"><acc></div>
         </div>
     </div>`;
+var enemyBossShipHTML = 
+    `<div class="enemy" id="enemy_boss">
+        <div id="pic"><input type="checkbox" id="-i-" value="-id-" class="enemySelector" onchange="sendPlayerChoice(this)">:id:</div>
+        <div id="shield"><shield></div>
+        <div id="hull"><hull></div>
+        <div id="aux">
+            <div class="fire">-fp-</div>
+            <div class="fire">-fp-</div>
+            <div class="fire">-fp-</div>
+            <div class="fire">-fp-</div>
+            <div id="acc"><acc></div>
+        </div>
+    </div>`;
 /*control references*/
 var startBtnHTML = 
     `<button id="game_start">Start</button>`;

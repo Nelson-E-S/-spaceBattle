@@ -76,14 +76,19 @@ class Game{
     };
     addEnemyShipSet(){
         this.enemy = loadEnemySet(6);
+        this.enemy.push(loadEnemyBoss());
     };
     drawEnemyShips(){
         if(getCurrentEnemeies() === 0){
             if(this.getEnemy().length === 1)
                 drawShip(this.getEnemy()[0]);
             else{
-                for(let i = 0; i <= Math.floor(rnd(0,1)); i++)
-                    drawShip(this.getEnemy()[i]);
+                if(this.getEnemy()[1].getID() === "enemy_boss")
+                    drawShip(this.getEnemy()[0]);
+                else{
+                    for(let i = 0; i <= Math.floor(rnd(0,1)); i++)
+                        drawShip(this.getEnemy()[i]);
+                }
             }
         }
     };
@@ -129,6 +134,21 @@ class Game{
             return true;
         return false;
     };
+    updateBossDamageData(cP,d){
+        let rootHealth = this.getEnemy()[this.getPlayerChoice()].getBaseHull() / (this.getEnemy()[this.getPlayerChoice()].getFirePodHealth().length + 1);
+        let resultSign = 0;
+        resultSign = this.getEnemy()[this.getPlayerChoice()].getFirePodHealth()[cP] - d;
+        if (resultSign < 0){
+            this.getEnemy()[this.getPlayerChoice()].getFirePodHealth()[cP] = 0;
+            resultSign = Math.abs(resultSign);
+            if(cP + 1 < this.getEnemy()[this.getPlayerChoice()].getFirePodHealth().length)
+                this.updateBossDamageData((cP+1),resultSign);
+            else
+                this.getEnemy()[this.getPlayerChoice()].setHull(this.getEnemy()[this.getPlayerChoice()].getHull() - d);
+        } else {
+            this.getEnemy()[this.getPlayerChoice()].getFirePodHealth()[cP] = resultSign;
+        }
+    }
     attackPhase(){
         this.updateMessageBox(startRound.replace("<x>",this.getRoundNumber()));
         if(this.getGameState() === "battle"){
@@ -138,10 +158,14 @@ class Game{
             if(this.attack(this.getPlayer()[0]) || this.getPlayerMissileChoice()){
                 this.updateMessageBox(playerAcc.replace("<h/m>","hit"));
                 if(this.getPlayerMissileChoice()){
+                    if(this.getEnemy()[this.getPlayerChoice()].getID() === "enemy_boss")
+                        this.updateBossDamageData(0,10);
                     this.getEnemy()[this.getPlayerChoice()].setHull(this.getEnemy()[this.getPlayerChoice()].getHull() - 10);
                     this.disablePlayerMissile();
                     this.updateMessageBox(playerDmg.replace("<x>",10));
                 } else {
+                    if(this.getEnemy()[this.getPlayerChoice()].getID() === "enemy_boss")
+                        this.updateBossDamageData(0,this.getPlayer()[0].getFirepower());
                     this.getEnemy()[this.getPlayerChoice()].setHull(this.getEnemy()[this.getPlayerChoice()].getHull() - this.getPlayer()[0].getFirepower());
                     this.updateMessageBox(playerDmg.replace("<x>",this.getPlayer()[0].getFirepower()));
                 };
@@ -161,30 +185,43 @@ class Game{
             };
             if(!enemyDown){
                 this.updateMessageBox(halfRound.replace("<x>",this.getRoundNumber()));
+                let bossPower = [];
+                let numAtks = 0;
                 for(let i = 0; i < getCurrentEnemeies(); i++){
                     if(!playerDown){
-                        if(this.attack(this.getEnemy()[i])){
-                            let damage = this.getEnemy()[i].getFirepower();
-                            let resultSign = this.getPlayer()[0].getShield() - damage;
-                            if (this.getPlayer()[0].getShield() === 0){
-                                this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - damage);
-                            }else if(resultSign < 0){
-                                this.getPlayer()[0].setShield(0);
-                                this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - Math.abs(resultSign));
-                            }else{
-                                this.getPlayer()[0].setShield(this.getPlayer()[0].getShield() - damage);
+                        if(this.getEnemy()[i].getID() === "enemy_boss"){
+                            bossPower = this.getEnemy()[i].getFirePodHealth();
+                            for(let p of bossPower){
+                                if (p > 0)
+                                    numAtks++;
                             }
-                            this.updateMessageBox(enemyAcc.replace("<h/m>","hit").replace("-id-",this.getEnemy()[i].getID()));
-                            this.updateMessageBox(enemyDmg.replace("<x>",this.getEnemy()[i].getFirepower()).replace("-id-",this.getEnemy()[i].getID()));
-                            this.updatePlayerShipVisual();
-                            if(this.getPlayer()[0].getHull() <= 0){
-                                this.updateMessageBox(destroyedPlayer.replace("-id-",this.getEnemy()[i].getID()));
-                                this.erasePlayerShips();
-                                this.clearPlayerShips();
-                                playerDown = true;
-                            };
-                        }else{
-                            this.updateMessageBox(enemyAcc.replace("<h/m>","missed").replace("-id-",this.getEnemy()[i].getID()));
+                        }else
+                            numAtks = 1;
+                        while(numAtks > 0 && !playerDown){
+                            if(this.attack(this.getEnemy()[i])){
+                                let damage = this.getEnemy()[i].getFirepower();
+                                let resultSign = this.getPlayer()[0].getShield() - damage;
+                                if (this.getPlayer()[0].getShield() === 0){
+                                    this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - damage);
+                                }else if(resultSign < 0){
+                                    this.getPlayer()[0].setShield(0);
+                                    this.getPlayer()[0].setHull(this.getPlayer()[0].getHull() - Math.abs(resultSign));
+                                }else{
+                                    this.getPlayer()[0].setShield(this.getPlayer()[0].getShield() - damage);
+                                }
+                                this.updateMessageBox(enemyAcc.replace("<h/m>","hit").replace("-id-",this.getEnemy()[i].getID()));
+                                this.updateMessageBox(enemyDmg.replace("<x>",this.getEnemy()[i].getFirepower()).replace("-id-",this.getEnemy()[i].getID()));
+                                this.updatePlayerShipVisual();
+                                if(this.getPlayer()[0].getHull() <= 0){
+                                    this.updateMessageBox(destroyedPlayer.replace("-id-",this.getEnemy()[i].getID()));
+                                    this.erasePlayerShips();
+                                    this.clearPlayerShips();
+                                    playerDown = true;
+                                };
+                            }else{
+                                this.updateMessageBox(enemyAcc.replace("<h/m>","missed").replace("-id-",this.getEnemy()[i].getID()));
+                            }
+                            numAtks--;
                         }
                     }
                 }
